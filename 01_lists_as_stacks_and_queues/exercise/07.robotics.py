@@ -45,4 +45,3 @@ while len(items_to_process) > 0:
         current_robot = ''
     else:
         items_to_process.append(current_item)
-

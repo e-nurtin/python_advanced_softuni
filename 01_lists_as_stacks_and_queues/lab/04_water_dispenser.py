@@ -1,15 +1,23 @@
+from _collections import deque
+
+
 def check_water(needed, tank_water):
+    next_person = list_of_queue.popleft()
+    
     if needed <= tank_water:
-        print(f"{list_of_queue.pop(0)} got water")
+        print(f"{next_person} got water")
         tank_water -= needed
+        
     else:
-        print(f"{list_of_queue.pop(0)} must wait")
+        print(f"{next_person} must wait")
+        list_of_queue.append(next_person)
+        
     return tank_water
 
 
 water_in_tank = int(input())
 
-list_of_queue = []
+list_of_queue = deque()
 start_filling = False
 
 while True:
@@ -30,6 +38,7 @@ while True:
     if current == "Start":
         start_filling = True
         continue
+        
     list_of_queue.append(current)
 
 print(f"{water_in_tank} liters left")
