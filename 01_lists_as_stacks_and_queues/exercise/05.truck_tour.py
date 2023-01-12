@@ -1,3 +1,29 @@
+## 2
+from _collections import deque
+
+gas_stations = deque([[int(x) for x in input().split()] for _ in range(int(input()))])
+
+index = 0
+gas_in_tank = 0
+
+while gas_stations:
+	quantity, distance = gas_stations.popleft()
+	
+	gas_in_tank += quantity
+	
+	if gas_in_tank < distance:
+		gas_stations.append([quantity, distance])
+		gas_in_tank = 0
+		index += 1
+	else:
+		gas_in_tank -= distance
+
+print(index)
+
+#
+#
+## 1
+#
 # gas_stations = int(input())
 #
 # starting_station = 0
@@ -31,8 +57,3 @@
 #         break
 #
 #
-#
-
-
-number_of_stations = int(input())
-
