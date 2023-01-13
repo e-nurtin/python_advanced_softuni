@@ -3,21 +3,23 @@ from _collections import deque
 
 gas_stations = deque([[int(x) for x in input().split()] for _ in range(int(input()))])
 
+copied_stations = gas_stations.copy()
 index = 0
 gas_in_tank = 0
 
-while gas_stations:
-	quantity, distance = gas_stations.popleft()
+while copied_stations:
+	quantity, distance = copied_stations.popleft()
 	
 	gas_in_tank += quantity
 	
 	if gas_in_tank < distance:
-		gas_stations.append([quantity, distance])
+		gas_stations.rotate(-1)
+		copied_stations = gas_stations.copy()
 		gas_in_tank = 0
 		index += 1
+		
 	else:
 		gas_in_tank -= distance
-
 print(index)
 
 #
