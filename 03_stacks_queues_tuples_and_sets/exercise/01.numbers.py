@@ -1,15 +1,15 @@
 def add(digits, sequence):
 	if sequence == 'First':
-		[first_sequence.add(num) for num in digits if num not in first_sequence]
+		first_sequence.union(digits)
 	elif sequence == 'Second':
-		[second_sequence.add(num) for num in digits if num not in second_sequence]
+		second_sequence.union(digits)
 	
 
 def remove(digits, sequence):
 	if sequence == 'First':
-		[first_sequence.remove(num) for num in digits if num in first_sequence]
+		first_sequence.difference(digits)
 	elif sequence == 'Second':
-		[second_sequence.remove(num) for num in digits if num in second_sequence]
+		second_sequence.difference(digits)
 
 
 def check_subset():
@@ -27,6 +27,7 @@ for _ in range(int(input())):
 	command = input()
 	
 	action, info, *numbers = [x if x.isalpha() else int(x) for x in command.split()]
+	numbers = set(numbers)
 	
 	if action == "Add":
 		add(numbers, info)
@@ -38,6 +39,8 @@ for _ in range(int(input())):
 		print(check_subset())
 		
 
-print(', '.join([str(x) for x in sorted(first_sequence)]))
-print(', '.join([str(x) for x in sorted(second_sequence)]))
+# print(', '.join([str(x) for x in sorted(first_sequence)]))
+# print(', '.join([str(x) for x in sorted(second_sequence)]))
 
+print(*sorted(first_sequence), sep=', ')
+print(*sorted(second_sequence), sep=', ')
