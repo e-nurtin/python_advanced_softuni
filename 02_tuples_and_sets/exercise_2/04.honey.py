@@ -20,7 +20,6 @@ while working_bees and nectars:
 		continue
 		
 	bee_with_nectar = working_bees.popleft()
-	
 	if current_nectar != 0:
 		total_honey += abs(arithmetic[symbols.popleft()](bee_with_nectar, current_nectar))
 
