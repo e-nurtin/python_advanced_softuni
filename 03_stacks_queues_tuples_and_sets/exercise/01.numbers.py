@@ -1,45 +1,26 @@
-def add(digits, sequence):
-	if sequence == 'First':
-		first_sequence.union(digits)
-	elif sequence == 'Second':
-		second_sequence.union(digits)
-	
+first_sequence = {int(x) for x in input().split()}
+second_sequence = {int(x) for x in input().split()}
 
-def remove(digits, sequence):
-	if sequence == 'First':
-		first_sequence.difference(digits)
-	elif sequence == 'Second':
-		second_sequence.difference(digits)
-
-
-def check_subset():
-	if first_sequence.issubset(second_sequence) or second_sequence.issubset(first_sequence):
-		return True
-	return False
-
-
-first_sequence = set(map(int, input().split()))
-second_sequence = set(map(int, input().split()))
-
+functions = {
+	"Add First": lambda x: [first_sequence.add(el) for el in x],
+	"Add Second": lambda x: [second_sequence.add(el) for el in x],
+	"Remove First": lambda x: [first_sequence.remove(el) for el in x if el in first_sequence],
+	"Remove Second": lambda x: [second_sequence.remove(el) for el in x if el in second_sequence],
+	"Check Subset": lambda: print(True) if second_sequence.issubset(first_sequence) or first_sequence.issubset(second_sequence) else print(False),
+}
 
 for _ in range(int(input())):
 	
-	command = input()
-	
-	action, info, *numbers = [x if x.isalpha() else int(x) for x in command.split()]
-	numbers = set(numbers)
-	
-	if action == "Add":
-		add(numbers, info)
-	
-	elif action == "Remove":
-		remove(numbers, info)
-		
-	elif action == "Check":
-		print(check_subset())
-		
+	data = input().split()
+	action = data[0] + ' ' + data[1]
+	data = {int(x) for x in data[2:]}
 
-# print(', '.join([str(x) for x in sorted(first_sequence)]))
+	if data:
+		functions[action](data)
+	else:
+		functions[action]()
+
+# print(', '.join([str(x) for x in  sorted(first_sequence)]))
 # print(', '.join([str(x) for x in sorted(second_sequence)]))
 
 print(*sorted(first_sequence), sep=', ')

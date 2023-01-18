@@ -13,17 +13,16 @@ arithmetic = {
 	'/': lambda bee, nectar: bee / nectar,
 }
 
-while True:
-	if len(working_bees) > 0 and len(nectars) > 0:
-		current_nectar = nectars.pop()
+while working_bees and nectars:
+	
+	current_nectar = nectars.pop()
+	if current_nectar < working_bees[0]:
+		continue
 		
-		if current_nectar >= working_bees[0]:
-			
-			bee_with_nectar = working_bees.popleft()
-			if current_nectar > 0:
-				total_honey += abs(arithmetic[symbols.popleft()](bee_with_nectar, current_nectar))
-	else:
-		break
+	bee_with_nectar = working_bees.popleft()
+	
+	if current_nectar != 0:
+		total_honey += abs(arithmetic[symbols.popleft()](bee_with_nectar, current_nectar))
 
 print(f"Total honey made: {total_honey}")
 
