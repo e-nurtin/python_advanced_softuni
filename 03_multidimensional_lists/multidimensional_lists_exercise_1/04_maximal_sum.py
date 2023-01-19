@@ -1,0 +1,1 @@
+make_matrix = lambda x, y, fill_function: [[fill_function(x, y) for y in range(y)] for x in range(x)]
