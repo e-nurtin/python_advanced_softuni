@@ -13,19 +13,23 @@ directions = {
 
 for r in range(n):
 	matrix.append(input().split())
-	for c in range(n):
-		if matrix[r][c] == "S":
-			santa_pos = [r, c]
-		elif matrix[r][c] == "V":
-			count_nice_kids += 1
+	
+	if "S" in matrix[r]:
+		santa_pos = [r, matrix[r].index("S")]
+		matrix[r][santa_pos[1]] = '-'
+		
+	if "V" in matrix[r]:
+		count_nice_kids += matrix[r].count("V")
 
-command = input()
-while command != 'Christmas morning' and total_presents > 0:
+
+while total_presents > 0:
+	command = input()
+	
+	if command == "Christmas morning":
+		break
 
 	r, c = santa_pos[0] + directions[command][0], santa_pos[1] + directions[command][1]
-	#
-	# if not (0 <= r < n and 0 <= c < n):
-	# 	continue
+
 	matrix[santa_pos[0]][santa_pos[1]] = '-'
 	santa_pos = [r, c]
 
@@ -48,9 +52,9 @@ while command != 'Christmas morning' and total_presents > 0:
 			matrix[row][col] = '-'
 
 	matrix[r][c] = 'S'
-	command = input()
 
-if total_presents == 0 and count_nice_kids - happy_nice_kids > 0:
+
+if not total_presents and happy_nice_kids < count_nice_kids:
 	print("Santa ran out of presents!")
 
 [print(' '.join(row)) for row in matrix]

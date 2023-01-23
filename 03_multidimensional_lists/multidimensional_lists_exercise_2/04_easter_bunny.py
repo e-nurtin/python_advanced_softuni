@@ -1,7 +1,8 @@
 n = int(input())
 
-bunny_pos, matrix = [], []
-most_eggs = [0, '']
+bunny_pos, matrix, best_path = [], [], []
+max_collected_eggs = 0
+best_direction = ''
 
 directions = {
 	'up': (-1, 0),
@@ -17,35 +18,26 @@ for row in range(n):
 			bunny_pos = [row, col]
 
 for direction, step in directions.items():
-
-	r, c = bunny_pos[0], bunny_pos[1]
-	eggs_collected = 0
-
-	for i in range(n):
-		r, c = r + step[0], c + step[1]
-
-		if 0 <= r < n and 0 <= c < n:
-			if matrix[r][c] == "X":
-				break
-				
-			eggs_collected += int(matrix[r][c])
-		else:
-			break
-
-	if eggs_collected > most_eggs[0]:
-		most_eggs[0] = eggs_collected
-		most_eggs[1] = direction
+	r, c = bunny_pos[0] + step[0], bunny_pos[1] + step[1]
 	
-# directions[direction].append(eggs_collected)
-print(most_eggs[1])
-r, c = bunny_pos[0], bunny_pos[1]
+	eggs_collected = 0
+	path = []
+	
+	while 0 <= r < n and 0 <= c < n:
+		
+		if matrix[r][c] == "X":
+			break
+		
+		eggs_collected += int(matrix[r][c])
+		path.append([r, c])
+		
+		r, c = r + step[0], c + step[1]
+	
+	if eggs_collected >= max_collected_eggs:
+		max_collected_eggs = eggs_collected
+		best_direction = direction
+		best_path = path
 
-for i in range(n):
-	r, c = r + directions[most_eggs[1]][0], c + directions[most_eggs[1]][1]
-
-	if not (0 <= r < n and 0 <= c < n):
-		break
-
-	print([r, c])
-
-print(most_eggs[0])
+print(best_direction)
+print(*best_path, sep='\n')
+print(max_collected_eggs)
