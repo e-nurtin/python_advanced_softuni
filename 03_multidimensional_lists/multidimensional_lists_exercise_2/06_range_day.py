@@ -64,5 +64,5 @@ if len(shot_targets) == count_targets:
 	print(f"Training completed! All {count_targets} targets hit.")
 else:
 	print(f"Training not completed! {count_targets - len(shot_targets)} targets left.")
-	
+
 [print(target) for target in shot_targets]
