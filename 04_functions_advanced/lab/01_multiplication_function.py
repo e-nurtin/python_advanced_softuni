@@ -1,8 +1,10 @@
+from functools import reduce
+
+
 def multiply(*args):
-	result = args[0]
-	for n in args[1:]:
-		result *= n
+	result = reduce(lambda x, y: x * y, args)
 	return result
+
 
 print(multiply(1, 4, 5))
 print(multiply(4, 5, 6, 1, 3))
