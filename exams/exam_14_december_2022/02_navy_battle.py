@@ -24,26 +24,25 @@ while True:
 	battlefield[ship_pos[0]][ship_pos[1]] = '-'
 	
 	r, c = ship_pos[0] + directions[command][0], ship_pos[1] + directions[command][1]
-	
+	element = battlefield[r][c]
+
 	ship_pos = [r, c]
 	
-	if battlefield[r][c] == '*':
+	if element == '*':
 		mines_step_on += 1
 		battlefield[r][c] = '-'
 		
 		if mines_step_on == 3:
-			battlefield[r][c] = 'S'
 			print(f"Mission failed, U-9 disappeared! Last known coordinates [{r}, {c}]!")
 			break
 	
-	elif battlefield[r][c] == 'C':
+	elif element == 'C':
 		cruiser_kills += 1
-		battlefield[r][c] = 'S'
 		
 		if cruiser_kills == 3:
 			print(f"Mission accomplished, U-9 has destroyed all battle cruisers of the enemy!")
 			break
-	
-	battlefield[r][c] = 'S'
-	
+
+
+battlefield[r][c] = 'S'
 [print(''.join(row)) for row in battlefield]
