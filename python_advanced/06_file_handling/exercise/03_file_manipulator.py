@@ -7,8 +7,7 @@ def create_file(filename):
 
 
 def append_to_file(info):
-	filename = info[0]
-	text = info[1]
+	filename, text = info[0], info[1]
 	
 	if os.path.exists(filename):
 		with open(filename, "a") as current_file:
