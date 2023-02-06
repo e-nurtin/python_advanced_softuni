@@ -1,11 +1,19 @@
 import os
 from collections import deque
 
+"""
+This game is console game based on the connect 4 game.
+We start filling the matrix with the player numbers from bottom to top
+and whoever first connects 4 of their number consecutively wins.
+"""
 
+
+# Draws a blank game board in the form of 2D array
 def new_game():
 	return [[0 for _ in range(COLUMN_SIZE)] for _ in range(ROW_SIZE)]
 
-#
+
+# TODO Save score to a file
 # def save_data(winner, loser, filename='game_data.txt'):
 # 	result = []
 # 	if not os.path.exists(filename):
@@ -23,7 +31,7 @@ def new_game():
 # 	with open(filename, 'w') as file:
 # 		file.write('\n'.join(result))
 
-
+# Gets current player's input and validates it
 def get_player_input(player):
 	while True:
 		player_input = input(f"{player}, please choose a column\n")
@@ -35,6 +43,7 @@ def get_player_input(player):
 		print(f"Invalid input! Please select a number between {1} and {COLUMN_SIZE}.")
 
 
+# Marks the player's choice on the board in the chosen column if it is not full.
 def mark_player_choice_on_board(column, player):
 	row = ROW_SIZE
 	for row in range(ROW_SIZE - 1, -1, -1):
@@ -52,29 +61,24 @@ def mark_player_choice_on_board(column, player):
 	return row, column
 
 
+# Check if the row is on the border of the matrix or not and returns corresponding answer.
 def check_board_borders(row, col, player):
 	if any([0 > col, col >= COLUMN_SIZE, 0 > row, row >= ROW_SIZE]):
 		return False
 	return True
 
 
+# Checks if the player in turn has won the game
 def check_possible_winner(player, row, col, winner_count=4):
 	vertical = check_vertical(col, player)
 	horizontal = check_horizontal(row, player)
 	diagonals = check_diagonals(row, col, player)
-	# check_left = all([check_board_borders(row, col - index, player) for index in range(winner_count)])
-	# check_right = all([check_board_borders(row, col + index, player) for index in range(winner_count)])
-	# check_down = all([check_board_borders(row + index, col, player) for index in range(winner_count)])
-	# check_up = all([check_board_borders(row - index, col, player) for index in range(winner_count)])
-	# check_right_up = all([check_board_borders(row - index, col + index, player) for index in range(winner_count)])
-	# check_left_up = all([check_board_borders(row - index, col - index, player) for index in range(winner_count)])
-	# check_left_down = all([check_board_borders(row + index, col - index, player) for index in range(winner_count)])
-	# check_right_down = all([check_board_borders(row + index, col + index, player) for index in range(winner_count)])
-	
+
 	if any([vertical, horizontal, diagonals]):
 		return True
 
 
+# Get all the elements in the current row and check if there's a winner
 def check_horizontal(row, player, needed_consecutive=4):
 	current_row = ''.join([str(x) for x in board[row]])
 	if player * needed_consecutive in current_row:
@@ -82,6 +86,7 @@ def check_horizontal(row, player, needed_consecutive=4):
 	return False
 
 
+# Get all the elements of the current column and check if there's a winner'
 def check_vertical(col, player, needed_consecutive=4):
 	current_col = ''.join([str(board[row][col]) for row in range(ROW_SIZE)])
 	if player * needed_consecutive in current_col:
@@ -89,12 +94,17 @@ def check_vertical(col, player, needed_consecutive=4):
 	return False
 
 
+# Get all 4 of the elements in the diagonals and check if there's a winner'
 def check_diagonals(row, col, player, needed_consecutive=4):
-	right_up = ''.join([str(board[row - i][col + i]) for i in range(COLUMN_SIZE) if check_board_borders(row - i, col + i, player)])
-	left_down = ''.join([str(board[row + i][col - i]) for i in range(1, COLUMN_SIZE) if check_board_borders(row + i, col - i, player)])
-
-	left_up = ''.join([str(board[row - i][col - i]) for i in range(COLUMN_SIZE) if check_board_borders(row - i, col - i, player)])
-	right_down = ''.join([str(board[row + i][col + i]) for i in range(1, COLUMN_SIZE) if check_board_borders(row + i, col + i, player)])
+	right_up = ''.join(
+		[str(board[row - i][col + i]) for i in range(COLUMN_SIZE) if check_board_borders(row - i, col + i, player)])
+	left_down = ''.join(
+		[str(board[row + i][col - i]) for i in range(1, COLUMN_SIZE) if check_board_borders(row + i, col - i, player)])
+	
+	left_up = ''.join(
+		[str(board[row - i][col - i]) for i in range(COLUMN_SIZE) if check_board_borders(row - i, col - i, player)])
+	right_down = ''.join(
+		[str(board[row + i][col + i]) for i in range(1, COLUMN_SIZE) if check_board_borders(row + i, col + i, player)])
 	
 	if player * needed_consecutive in left_down + right_up or player * needed_consecutive in left_up + right_down:
 		return True
@@ -110,6 +120,7 @@ players = deque(["Player 1", "Player 2"])
 
 board = new_game()
 
+# Main Loop can continue playing after a game is over.
 while another_game:
 	
 	player_in_turn = players.popleft()
@@ -124,6 +135,7 @@ while another_game:
 		
 		if game == "":
 			board = new_game()
+			game_count += 1
 		else:
 			another_game = False
 	
