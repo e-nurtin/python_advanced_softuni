@@ -10,4 +10,3 @@ with open('text.txt') as file:
 
 		result = current_line.split()[::-1]
 		print(*result)
-

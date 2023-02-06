@@ -10,6 +10,7 @@ def read_lines(filename='text.txt'):
 
 def count_alpha_and_punct(text):
 	punctuations, alphabet_letters = 0, 0
+	
 	for char in text:
 		if char.isalpha():
 			alphabet_letters += 1
