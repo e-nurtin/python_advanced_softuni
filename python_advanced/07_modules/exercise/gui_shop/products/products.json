@@ -1,0 +1,26 @@
+{
+  "Baby Grogu Toy": {
+    "img_path": "products/images/grogu.png",
+    "count": 7
+  },
+  "Mandalorian Exclusive Toy": {
+    "img_path": "products/images/mandalorian.png",
+    "count": 10
+  },
+  "Master Yoda Toy": {
+    "img_path": "products/images/master_yoda.png",
+    "count": 10
+  },
+  "Trooper Toy": {
+    "img_path": "products/images/trooper.png",
+    "count": 8
+  },
+  "Darth Vader Toy": {
+    "img_path": "products/images/darth_vader.png",
+    "count": 0
+  },
+  "Chewbacca Toy": {
+    "img_path": "products/images/chewbaca.png",
+    "count": 10
+  }
+}
