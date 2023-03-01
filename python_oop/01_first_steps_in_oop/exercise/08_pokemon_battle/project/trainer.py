@@ -1,12 +1,9 @@
-from pokemon import Pokemon
-
-
 class Trainer:
 	def __init__(self, name: str):
 		self.name = name
 		self.pokemons = []
 	
-	def add_pokemon(self, pokemon: Pokemon):
+	def add_pokemon(self, pokemon):
 		if pokemon not in self.pokemons:
 			self.pokemons.append(pokemon)
 			return f"Caught {pokemon.name} with health {pokemon.health}"

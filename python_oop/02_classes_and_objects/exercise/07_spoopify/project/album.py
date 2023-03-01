@@ -4,7 +4,7 @@ class Album:
 		# self.args = args
 		self.published = False
 		self.songs = [arg for arg in args if not arg.single]
-		
+	
 	def add_song(self, song):
 		if song.single:
 			return f"Cannot add {song.name}. It's a single"
@@ -12,7 +12,7 @@ class Album:
 		elif self.published:
 			return f"Cannot add songs. Album is published."
 		
-		elif any([song.name == x.name for x in self.songs]):
+		elif song in self.songs:
 			return "Song is already in the album."
 		
 		self.songs.append(song)
@@ -29,11 +29,11 @@ class Album:
 		return f"Removed song {song_name} from album {self.name}."
 	
 	def publish(self):
-		if not self.published:
-			self.published = True
-			return f"Album {self.name} has been published."
+		if self.published:
+			return f"Album {self.name} is already published."
 		
-		return f"Album {self.name} is already published."
+		self.published = True
+		return f"Album {self.name} has been published."
 	
 	def details(self):
 		result = [f'Album {self.name}']
