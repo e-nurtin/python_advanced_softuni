@@ -32,7 +32,7 @@ from project.registration import Registration
 # print(library.books_available)
 # print(library.rented_books)
 # print(user.books)
-#
+
 # user = User(12, 'Peter')
 # library = Library()
 # registration = Registration()
@@ -46,4 +46,4 @@ from project.registration import Registration
 # library.get_book('J.K.Rowling', 'The Deathly Hallows', 10, user)
 # print(user)
 # print(registration.remove_user(user, library))
-#
+

@@ -21,5 +21,5 @@ class ProductRepository:
 		# self.products.remove(next(filter(lambda x: x.name == product_name, self.products)))
 	
 	def __repr__(self):
-		result = [f"{x.name}: {x.quantity}" for x in self.products]
+		result = [f"{x}: {x.quantity}" for x in self.products]
 		return '\n'.join(result)

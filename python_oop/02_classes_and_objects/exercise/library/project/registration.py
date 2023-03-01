@@ -20,6 +20,7 @@ class Registration:
 				
 				if user.username in library.rented_books:
 					library.rented_books[new_username] = library.rented_books.pop(user.username)
+					
 				user.username = new_username
 				
 				return f"Username successfully changed to: {new_username} for user id: {user_id}"
