@@ -3,42 +3,48 @@ from project.topping import Topping
 
 
 class Pizza:
-	def __init__(self, name: str, dough: Dough, max_number_of_toppings: int, toppings: dict):
+	def __init__(self, name: str, dough: Dough, max_number_of_toppings: int):
 		self.name = name
 		self.dough = dough
 		self.max_number_of_toppings = max_number_of_toppings
-		self.toppings = toppings
+		self.toppings = dict()
 			
 	@property
 	def name(self):
-		return self.name
+		return self.__name
 	
 	@name.setter
 	def name(self, value):
 		if value == "":
 			raise ValueError("The name cannot be an empty string")
-		self.name = value
+		self.__name = value
 		
 	@property
 	def dough(self):
-		return self.dough
+		return self.__dough
 	
 	@dough.setter
 	def dough(self, value):
 		if not value:
 			raise ValueError("You should add dough to the pizza")
-		self.dough = value
+		self.__dough = value
 		
 	@property
 	def max_number_of_toppings(self):
-		return self.max_number_of_toppings
+		return self.__max_number_of_toppings
 	
 	@max_number_of_toppings.setter
 	def max_number_of_toppings(self, value):
 		if value <= 0:
 			raise ValueError("The maximum number of toppings cannot be less or equal to zero")
-		self.max_number_of_toppings = value
+		self.__max_number_of_toppings = value
 		
 	def add_topping(self, topping: Topping):
-		pass
+		if self.max_number_of_toppings <= len(self.toppings):
+			raise ValueError("Not enough space for another topping")
+		self.toppings[topping.topping_type] = self.toppings.get(topping.topping_type, 0) + topping.weight
+	
+	def calculate_total_weight(self):
+		total_weight = self.dough.weight + sum([value for value in self.toppings.values()])
+		return total_weight
 	
