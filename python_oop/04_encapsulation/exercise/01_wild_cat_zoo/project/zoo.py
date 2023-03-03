@@ -52,33 +52,30 @@ class Zoo:
 	
 	def profit(self, amount):
 		self.__budget += amount
-		
+	
+	def __build_entity_string(self, entities, entity_type):
+		counter = 0
+		result = ''
+		for entity in entities:
+			if entity.__class__.__name__ == entity_type:
+				result += repr(entity) + '\n'
+				counter += 1
+		return f"----- {counter} {entity_type}s:\n" + result[:-1]
+	
 	def animals_status(self):
 		order_of_animals = ['Lion', 'Tiger', 'Cheetah']
-		result = [f"You have {len(self.animals)} animals"]
+		result = f"You have {len(self.animals)} animals\n"
 		
 		for animal_type in order_of_animals:
-			count_of_current_class = sum([1 for animal in self.animals if animal.__class__.__name__ == animal_type])
-			result.append(f"----- {count_of_current_class} {animal_type}s:")
-			
-			for animal in self.animals:
-				if animal.__class__.__name__ == animal_type:
-					result.append(f"{animal}")
-					
-		return '\n'.join(result)
+			result += self.__build_entity_string(self.animals, animal_type)
+		return result
 	
 	def workers_status(self):
 		order_of_workers = ['Keeper', 'Caretaker', 'Vet']
-		result = [f"You have {len(self.workers)} workers"]
+		result = f"You have {len(self.workers)} workers\n"
 		
 		for worker_type in order_of_workers:
-			count_of_current_class = sum([1 for worker in self.workers if worker.__class__.__name__ == worker_type])
-			result.append(f"----- {count_of_current_class} {worker_type}s:")
-			
-			for worker in self.workers:
-				if worker.__class__.__name__ == worker_type:
-					result.append(f"{worker}")
-					
-		return '\n'.join(result)
+			result += self.__build_entity_string(self.workers, worker_type)
+		return result
 
 		
