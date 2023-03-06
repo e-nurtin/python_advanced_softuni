@@ -13,6 +13,12 @@ class Gym:
 		self.plans = []
 		self.subscriptions = []
 		
+	@staticmethod
+	def __find_by_id(entities, entity_id):
+		for entity in entities:
+			if entity.id == entity_id:
+				return entity
+		
 	def add_customer(self, customer: Customer):
 		if customer not in self.customers:
 			self.customers.append(customer)
@@ -38,13 +44,8 @@ class Gym:
 		trainer = self.__find_by_id(self.trainers, subscription.trainer_id)
 		customer = self.__find_by_id(self.customers, subscription.customer_id)
 		plan = self.__find_by_id(self.plans, subscription.exercise_id)
-		equipment = self.__find_by_id(self.equipment, plan.equipment_id)  # Take from plans!
+		equipment = self.__find_by_id(self.equipment, plan.equipment_id)  # Taken from plans!
 
 		result = repr(subscription) + '\n' + repr(customer) + '\n' + repr(trainer) + '\n' + repr(equipment) + '\n' + repr(plan)
 		return result
 	
-	def __find_by_id(self, entities, entity_id):
-		for entity in entities:
-			if entity.id == entity_id:
-				return entity
-		
