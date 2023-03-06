@@ -34,12 +34,17 @@ class Gym:
 			self.subscriptions.append(subscription)
 	
 	def subscription_info(self, subscription_id: int):
-		subscription = [sub for sub in self.subscriptions if sub.id == subscription_id][0]
-		trainer = [trainer for trainer in self.trainers if trainer.id == subscription.trainer_id][0]
-		customer = [c for c in self.customers if c.id == subscription.customer_id][0]
-		plan = [p for p in self.plans if p.id == subscription.exercise_id][0]
-		equipment = [eq for eq in self.equipment if eq.id == plan.equipment_id][0]  # Take from plans!
+		subscription = self.__find_by_id(self.subscriptions, subscription_id)
+		trainer = self.__find_by_id(self.trainers, subscription.trainer_id)
+		customer = self.__find_by_id(self.customers, subscription.customer_id)
+		plan = self.__find_by_id(self.plans, subscription.exercise_id)
+		equipment = self.__find_by_id(self.equipment, plan.equipment_id)  # Take from plans!
 
 		result = repr(subscription) + '\n' + repr(customer) + '\n' + repr(trainer) + '\n' + repr(equipment) + '\n' + repr(plan)
 		return result
+	
+	def __find_by_id(self, entities, entity_id):
+		for entity in entities:
+			if entity.id == entity_id:
+				return entity
 		
