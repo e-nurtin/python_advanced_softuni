@@ -36,6 +36,7 @@ class Zoo:
 	
 	def pay_workers(self):
 		budget_needed = sum([worker.salary for worker in self.workers])
+		
 		if budget_needed > self.__budget:
 			return "You have no budget to pay your workers. They are unhappy"
 		
@@ -44,6 +45,7 @@ class Zoo:
 	
 	def tend_animals(self):
 		money_needed = sum([animal.money_for_care for animal in self.animals])
+		
 		if money_needed > self.__budget:
 			return "You have no budget to tend the animals. They are unhappy."
 		
@@ -52,23 +54,27 @@ class Zoo:
 	
 	def profit(self, amount):
 		self.__budget += amount
-	
-	def __build_entity_string(self, entities, entity_type):
+		
+	@staticmethod
+	def __build_entity_string(entities, entity_type):
 		counter = 0
 		result = ''
+		
 		for entity in entities:
 			if entity.__class__.__name__ == entity_type:
 				result += repr(entity) + '\n'
 				counter += 1
-		return f"----- {counter} {entity_type}s:\n" + result[:-1]
+				
+		return f"----- {counter} {entity_type}s:\n" + result
 	
 	def animals_status(self):
 		order_of_animals = ['Lion', 'Tiger', 'Cheetah']
 		result = f"You have {len(self.animals)} animals\n"
 		
 		for animal_type in order_of_animals:
-			result += self.__build_entity_string(self.animals, animal_type)
-		return result
+			result += Zoo.__build_entity_string(self.animals, animal_type)
+			
+		return result.strip()
 	
 	def workers_status(self):
 		order_of_workers = ['Keeper', 'Caretaker', 'Vet']
@@ -76,6 +82,7 @@ class Zoo:
 		
 		for worker_type in order_of_workers:
 			result += self.__build_entity_string(self.workers, worker_type)
-		return result
+			
+		return result.strip()
 
 		

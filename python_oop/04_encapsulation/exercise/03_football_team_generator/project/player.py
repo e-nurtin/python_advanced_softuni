@@ -12,4 +12,4 @@ class Player:
 	
 	def __str__(self):
 		return f"Player: {self.__name}\nSprint: {self.__sprint}\nDribble: {self.__dribble}" \
-		       f"\nPassing: {self.__passing}\nShooting: {self.__shooting}"
+			f"\nPassing: {self.__passing}\nShooting: {self.__shooting}"
