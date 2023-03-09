@@ -25,7 +25,8 @@ class PhotoAlbum:
 			result += "-" * 11 + '\n' + ' '.join('[]' for _ in range(len(page))) + '\n'
 		return result + '-' * 11
 
-import unittest
+
+# import unittest
 
 
 # class TestsPhotoAlbum(unittest.TestCase):

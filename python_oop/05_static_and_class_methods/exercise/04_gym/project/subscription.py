@@ -1,4 +1,7 @@
-class Subscription:
+from project.id_mixin import IdMixin
+
+
+class Subscription(IdMixin):
 	id = 1
 	
 	def __init__(self, date: str, customer_id: int, trainer_id: int, exercise_id: int):
@@ -7,13 +10,7 @@ class Subscription:
 		self.trainer_id = trainer_id
 		self.exercise_id = exercise_id
 		self.id = self.get_next_id()
-	
-	@staticmethod
-	def get_next_id():
-		result = Subscription.id
-		Subscription.id += 1
-		return result
-	
+
 	def __repr__(self):
 		return f"Subscription <{self.id}> on {self.date}"
 	

@@ -46,6 +46,5 @@ class Gym:
 		plan = self.__find_by_id(self.plans, subscription.exercise_id)
 		equipment = self.__find_by_id(self.equipment, plan.equipment_id)  # Taken from plans!
 
-		result = repr(subscription) + '\n' + repr(customer) + '\n' + repr(trainer) + '\n' + repr(equipment) + '\n' + repr(plan)
-		return result
+		return f"{subscription}\n{customer}\n{trainer}\n{equipment}\n{plan}"
 	

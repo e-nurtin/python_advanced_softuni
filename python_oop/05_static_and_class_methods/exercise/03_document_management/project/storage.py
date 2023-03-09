@@ -23,9 +23,6 @@ class Storage:
 	
 	def edit_category(self, category_id: int, new_name: str):
 		[category.edit(new_name) for category in self.categories if category.id == category_id]
-		# for category in self.categories:
-		# 	if category.id == category_id:
-		# 		category.edit(new_name)
 	
 	def edit_topic(self, topic_id: int, new_topic: str, new_storage_folder: str):
 		[topic.edit(new_topic, new_storage_folder) for topic in self.topics if topic_id == topic.id]
