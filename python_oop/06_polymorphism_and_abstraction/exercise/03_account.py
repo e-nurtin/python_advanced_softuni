@@ -14,15 +14,14 @@ class Account:
 	def balance(self):
 		return self.amount + sum(self._transactions)
 	
-	@staticmethod
-	def validate_transaction(account, amount):
-		balance_after_transaction = account.balance() + amount
+	def handle_transaction(self, amount):
+		balance_after_transaction = self.balance + amount
 		
 		if balance_after_transaction < 0:
 			raise ValueError("sorry cannot go in debt!")
 		
-		account.add_transaction(amount)
-		return f"New balance: {account.balance()}"
+		self.add_transaction(amount)
+		return f"New balance: {self.balance}"
 	
 	def __str__(self):
 		return f"Account of {self.owner} with starting amount: {self.amount}"
@@ -56,7 +55,7 @@ class Account:
 		account._transactions = self._transactions + other._transactions
 		return account
 	
-#
+
 # acc = Account('bob', 10)
 # acc2 = Account('john')
 # print(acc)
@@ -70,7 +69,7 @@ class Account:
 # 	print(transaction)
 # print(acc[1])
 # print(list(reversed(acc)))
-#
+# print(acc.handle_transaction(20))
 #
 # acc2.add_transaction(10)
 # acc2.add_transaction(60)
