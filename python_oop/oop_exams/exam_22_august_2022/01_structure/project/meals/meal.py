@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 
 
-class Delicacy(ABC):
+class Meal(ABC):
 	@abstractmethod
-	def __init__(self, name: str, price: float):
+	def __init__(self, name: str, price: float, quantity: int):
 		self.name = name
 		self.price = price
-		self.portion = 0
+		self.quantity = quantity
 	
 	@property
 	def name(self):
@@ -14,8 +14,8 @@ class Delicacy(ABC):
 	
 	@name.setter
 	def name(self, value):
-		if value.strip() == "":
-			raise ValueError("Name cannot be null or whitespace!")
+		if value == "":
+			raise ValueError("Name cannot be an empty string!")
 		self._name = value
 	
 	@property
@@ -25,8 +25,11 @@ class Delicacy(ABC):
 	@price.setter
 	def price(self, value):
 		if value <= 0:
-			raise ValueError("Price cannot be less or equal to zero!")
+			raise ValueError("Invalid price!")
 		self._price = value
 	
+	@abstractmethod
 	def details(self):
-		return f"{self.__class__.__name__} {self.name}: {self.portion}g - {self.price:.2f}lv."
+		pass
+	
+	

@@ -5,6 +5,3 @@ class Gingerbread(Delicacy):
 	def __init__(self, name: str, price: float):
 		super().__init__(name, price)
 		self.portion = 200
-	
-	def details(self):
-		return f"Gingerbread {self.name}: {self.portion}g - {self.price:.2f}lv."
