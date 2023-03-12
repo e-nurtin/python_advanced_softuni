@@ -1,5 +1,5 @@
-from project.animals.animal import Mammal
-from project.animals.mixins import MakeSound, FeedAnimal
+from project import Mammal
+from project import MakeSound, FeedAnimal
 
 
 class Mouse(Mammal, MakeSound, FeedAnimal):

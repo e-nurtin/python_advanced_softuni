@@ -1,5 +1,5 @@
-from project.animals.animal import Bird
-from project.animals.mixins import MakeSound, FeedAnimal
+from project import Bird
+from project import MakeSound, FeedAnimal
 
 
 class Owl(Bird, MakeSound, FeedAnimal):

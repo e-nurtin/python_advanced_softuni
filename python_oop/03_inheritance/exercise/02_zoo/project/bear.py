@@ -1,5 +1,5 @@
 
-from project.mammal import Mammal
+from project import Mammal
 
 
 class Bear(Mammal):

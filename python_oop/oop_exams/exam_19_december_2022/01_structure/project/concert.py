@@ -50,7 +50,7 @@ class Concert:
 	
 	@ticket_price.setter
 	def ticket_price(self, value):
-		if value < 1:
+		if value < 1.0:
 			raise ValueError("Ticket price must be at least 1.00$!")
 		self._ticket_price = value
 	
@@ -60,7 +60,7 @@ class Concert:
 	
 	@expenses.setter
 	def expenses(self, value):
-		if value < 0:
+		if value < 0.0:
 			raise ValueError("Expenses cannot be a negative number!")
 		self._expenses = value
 	
