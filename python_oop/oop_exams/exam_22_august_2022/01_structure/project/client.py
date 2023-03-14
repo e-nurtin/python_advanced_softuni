@@ -7,6 +7,7 @@ class Client:
 		self.phone_number = phone_number
 		self.shopping_cart: List[Meal] = []
 		self.bill = 0.0
+		self.meal_quantities = {}
 	
 	@property
 	def phone_number(self):
@@ -23,7 +24,8 @@ class Client:
 		
 		self._phone_number = value
 	
-	def process_order(self, meal, quantity):
+	def process_order(self, meal: Meal, meal_name, quantity):
+		self.meal_quantities[meal_name] = self.meal_quantities.get(meal_name, 0) + quantity
 		self.bill += meal.price * quantity
 		self.shopping_cart.append(meal)
 	
@@ -31,5 +33,6 @@ class Client:
 		return ', '.join([meal.name for meal in self.shopping_cart])
 	
 	def reset_cart_and_bill(self):
+		self.meal_quantities = {}
 		self.shopping_cart = []
 		self.bill = 0

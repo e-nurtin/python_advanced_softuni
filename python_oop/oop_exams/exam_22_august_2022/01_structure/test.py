@@ -12,11 +12,12 @@ risotto_with_wild_mushrooms = MainDish("Risotto with Wild Mushrooms", 15)
 chocolate_cake_with_mascarpone = Dessert("Chocolate Cake with Mascarpone", 4.60, 17)
 chocolate_and_violets = Dessert("Chocolate and Violets", 5.20)
 print(food_orders_app.add_meals_to_menu(
-    french_toast, hummus_and_avocado_sandwich,
-    tortilla_with_beef_and_pork,
-    risotto_with_wild_mushrooms,
-    chocolate_cake_with_mascarpone,
-    chocolate_and_violets))
+	french_toast, hummus_and_avocado_sandwich,
+	tortilla_with_beef_and_pork,
+	risotto_with_wild_mushrooms,
+	chocolate_cake_with_mascarpone,
+	chocolate_and_violets))
+
 print(food_orders_app.show_menu())
 food = {"Hummus and Avocado Sandwich": 5,
         "Risotto with Wild Mushrooms": 1,
@@ -25,5 +26,9 @@ print(food_orders_app.add_meals_to_shopping_cart('0899999999', **food))
 additional_food = {"Risotto with Wild Mushrooms": 2,
                    "Tortilla with Beef and Pork": 2}
 print(food_orders_app.add_meals_to_shopping_cart('0899999999', **additional_food))
-print(food_orders_app.finish_order("0899999999"))
+print(food_orders_app.cancel_order('0899999999'))
+# print(food_orders_app.finish_order("0899999999"))
 print(food_orders_app)
+
+print(food_orders_app.add_meals_to_shopping_cart('0887896654', **food))
+print(food_orders_app.finish_order("0887896654"))
