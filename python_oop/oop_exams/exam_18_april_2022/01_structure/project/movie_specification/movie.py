@@ -3,6 +3,7 @@ from project.user import User
 
 
 class Movie(ABC):
+	@abstractmethod
 	def __init__(self, title: str, year: int, owner: object, age_restriction: int):
 		self.title = title
 		self.year = year
@@ -21,10 +22,7 @@ class Movie(ABC):
 	
 	@age_restriction.setter
 	def age_restriction(self, value):
-		if value == "":
-			self.__age_restriction = self.allowed_min_age
-		
-		elif value < self.allowed_min_age:
+		if value < self.allowed_min_age:
 			raise ValueError(f"{type(self).__name__} movies must be restricted for audience under {self.allowed_min_age} years!")
 		
 		else:
