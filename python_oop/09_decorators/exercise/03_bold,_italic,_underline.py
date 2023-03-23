@@ -1,6 +1,6 @@
 def make_bold(function):
 	def wrapper(*args):
-		result = "<b>" + function(*args) + "</b>"
+		result = f"<b>{function(*args)}</b>"
 		return result
 	
 	return wrapper
@@ -8,7 +8,7 @@ def make_bold(function):
 
 def make_italic(function):
 	def wrapper(*args):
-		result = "<i>" + function(*args) + "</i>"
+		result = f"<i>{function(*args)}</i>"
 		return result
 	
 	return wrapper
@@ -16,7 +16,7 @@ def make_italic(function):
 
 def make_underline(function):
 	def wrapper(*args):
-		result = "<u>" + function(*args) + "</u>"
+		result = f"<u>{function(*args)}</u>"
 		return result
 	
 	return wrapper

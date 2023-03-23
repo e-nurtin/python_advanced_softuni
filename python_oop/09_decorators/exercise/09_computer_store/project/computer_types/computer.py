@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from math import log2
 
 
 class Computer(ABC):
@@ -10,19 +11,19 @@ class Computer(ABC):
 		self.price = 0
 	
 	@property
+	@abstractmethod
 	def computer_type(self):
-		types = {"Laptop": "Laptop", "DesktopComputer": "Desktop Computer"}
-		return types[self.__class__.__name__]
+		...
 	
-	@abstractmethod
 	@property
+	@abstractmethod
 	def available_processors(self):
-		pass
+		...
 	
-	@abstractmethod
 	@property
+	@abstractmethod
 	def max_ram(self):
-		pass
+		...
 	
 	@property
 	def manufacturer(self):
@@ -49,28 +50,21 @@ class Computer(ABC):
 			raise ValueError(
 				f"{processor} is not compatible with {self.computer_type} {self.manufacturer} {self.model}!")
 		
-		level_of_ram = self.__check_for_valid_ram(ram)
-		price = self.__assemble_computer(processor, level_of_ram, ram)
-		return f"Created {self.manufacturer} {self.model} with {processor} and {ram}GB RAM for {price}$."
-	
-	def __check_for_valid_ram(self, ram):
-		level_of_power_of_two = 1
-		current_ram = 2
+		if not self.__check_for_valid_ram(ram) or ram > self.max_ram:
+			raise ValueError(f"{ram}GB RAM is not compatible with {self.computer_type} {self.manufacturer} {self.model}!")
 		
-		while current_ram <= self.max_ram:
-			level_of_power_of_two += 1
-			
-			if current_ram == ram:
-				return level_of_power_of_two
-			
-			current_ram = 2 ** level_of_power_of_two
-		
-		raise ValueError(f"{ram}GB RAM is not compatible with {self.computer_type} {self.manufacturer} {self.model}!")
+		self.__assemble_computer(processor, ram)
+		return f"Created {self.manufacturer} {self.model} with {processor} and {ram}GB RAM for {self.price}$."
 	
-	def __assemble_computer(self, processor, level_of_ram, ram_gb):
+	@staticmethod
+	def __check_for_valid_ram(ram):
+		return str(log2(ram)).endswith('.0')
+	
+	def __assemble_computer(self, processor, ram_gb):
 		price_for_level_of_ram = 100
-		price = 0
 		self.ram = ram_gb
 		self.processor = processor
-		price += self.available_processors[processor] + level_of_ram * price_for_level_of_ram
-		return price
+		self.price = self.available_processors[processor] + int(log2(ram_gb)) * price_for_level_of_ram
+	
+	def __repr__(self):
+		return f"{self.manufacturer} {self.model} with {self.processor} and {self.ram}GB RAM"
