@@ -21,6 +21,16 @@ class Table(ABC):
 	def table_type(self):
 		...
 	
+	@property
+	def capacity(self):
+		return self.__capacity
+	
+	@capacity.setter
+	def capacity(self, value):
+		if value <= 0:
+			raise ValueError("Capacity has to be greater than 0!")
+		self.__capacity = value
+	
 	def reserve(self, number_of_people: int):
 		self.is_reserved = True
 		self.number_of_people = number_of_people
