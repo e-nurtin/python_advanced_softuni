@@ -13,6 +13,14 @@ class ChristmasPastryShopApp:
 		self.delicacies = []
 		self.income: float = 0.0
 	
+	@property
+	def delicacy_types(self):
+		return {'Gingerbread': Gingerbread, 'Stolen': Stolen}
+	
+	@property
+	def booth_types(self):
+		return {"Open Booth": OpenBooth, "Private Booth": PrivateBooth}
+	
 	@staticmethod
 	def __find_entity_from_name(entities_to_check, name_to_search_for):
 		for entity in entities_to_check:
@@ -38,20 +46,20 @@ class ChristmasPastryShopApp:
 		if self.__find_entity_from_name(self.delicacies, name):
 			raise Exception(f"{name} already exists!")
 		
-		elif type_delicacy not in ChristmasPastryShopApp.DELICACIES:
+		elif type_delicacy not in self.delicacy_types:
 			raise Exception(f"{type_delicacy} is not on our delicacy menu!")
 		
-		self.delicacies.append(ChristmasPastryShopApp.DELICACIES[type_delicacy](name, price))
+		self.delicacies.append(self.delicacy_types[type_delicacy](name, price))
 		return f"Added delicacy {name} - {type_delicacy} to the pastry shop."
 	
 	def add_booth(self, type_booth: str, booth_number: int, capacity: int):
 		if self.__find_booth(self.booths, booth_number):
 			raise Exception(f"Booth number {booth_number} already exists!")
 		
-		elif type_booth not in ChristmasPastryShopApp.BOOTHS:
-			raise f"{type_booth} is not a valid booth!"
+		elif type_booth not in self.booth_types:
+			raise Exception(f"{type_booth} is not a valid booth!")
 		
-		self.booths.append(ChristmasPastryShopApp.BOOTHS[type_booth](booth_number, capacity))
+		self.booths.append(self.booth_types[type_booth](booth_number, capacity))
 		return f"Added booth number {booth_number} in the pastry shop."
 	
 	def reserve_booth(self, number_of_people: int):
@@ -81,9 +89,8 @@ class ChristmasPastryShopApp:
 		bill = booth.calculate_bill()
 		booth.free_booth()
 		self.income += bill
-	
+		
 		return f"Booth {booth_number}:\nBill: {bill:.2f}lv."
 	
 	def get_income(self):
 		return f"Income: {self.income:.2f}lv."
-	

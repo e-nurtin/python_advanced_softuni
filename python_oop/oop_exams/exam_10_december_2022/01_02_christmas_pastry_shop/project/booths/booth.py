@@ -2,15 +2,18 @@ from abc import ABC, abstractmethod
 
 
 class Booth(ABC):
-	PRICE_PER_PERSON = 0
 	
-	@abstractmethod
 	def __init__(self, booth_number: int, capacity: int):
 		self.booth_number = booth_number
 		self.capacity = capacity
 		self.delicacy_orders = []
 		self.price_for_reservation: float = 0
 		self.is_reserved: bool = False
+		
+	@property
+	@abstractmethod
+	def price_per_person(self):
+		...
 	
 	@property
 	def capacity(self):
@@ -23,7 +26,7 @@ class Booth(ABC):
 		self._capacity = value
 	
 	def reserve(self, number_of_people):
-		self.price_for_reservation = self.PRICE_PER_PERSON * number_of_people
+		self.price_for_reservation = self.price_per_person() * number_of_people
 		self.is_reserved = True
 	
 	def order_delicacy(self, delicacy_order):
