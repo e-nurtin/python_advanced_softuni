@@ -3,6 +3,7 @@ from project.student import Student
 
 
 class StudentTests(TestCase):
+	
 	def test_student_init_when_no_courses(self):
 		student = Student('TestName')
 		

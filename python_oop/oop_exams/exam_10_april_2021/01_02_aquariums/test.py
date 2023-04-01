@@ -3,7 +3,8 @@ from project.controller import Controller
 controller = Controller()
 
 print(controller.add_aquarium("SaltwaterAquarium", 'AquaSalt'))
-# print(controller.add_fish('AquaSalt', 'SaltwaterFish', 'Sea Bass', 'Bass', 20))
+# print(controller.add_aquarium("SaltwaterAquarium", ''))
+print(controller.add_fish('AquaSalt', 'SaltwaterFish', 'Sea Bass', 'Bass', 20))
 print(controller.add_aquarium("FreshwaterAquarium", 'Freshy'))
 print(controller.add_fish("Freshy", 'FreshwaterFish', 'Sally', 'Salmon', 40))
 print(controller.add_fish("Freshy", 'FreshwaterFish', 'Plessy', 'Fish', 20))

@@ -70,7 +70,7 @@ class Concert:
 	
 	@place.setter
 	def place(self, value):
-		if len(value.strip()) < 2:
+		if len(value) < 2 or value.isspace():
 			raise ValueError("Place must contain at least 2 chars. It cannot be empty!")
 		self._place = value
 	

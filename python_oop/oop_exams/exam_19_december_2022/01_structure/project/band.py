@@ -1,4 +1,4 @@
-from project import Musician
+from project.band_members.musician import Musician
 from typing import List
 
 

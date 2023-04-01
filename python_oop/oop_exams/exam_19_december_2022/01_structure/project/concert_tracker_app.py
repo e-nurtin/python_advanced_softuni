@@ -1,10 +1,10 @@
 from typing import List
-from project import Band
-from project import Drummer
-from project import Guitarist
-from project import Musician
-from project import Singer
-from project import Concert
+from project.band import Band
+from project.band_members.drummer import Drummer
+from project.band_members.guitarist import Guitarist
+from project.band_members.musician import Musician
+from project.band_members.singer import Singer
+from project.concert import Concert
 
 
 class ConcertTrackerApp:
@@ -15,7 +15,7 @@ class ConcertTrackerApp:
 		self.bands: List[Band] = []
 		self.musicians: List[Musician] = []
 		self.concerts: List[Concert] = []
-		
+	
 	def __find_concert_by_place(self, place: str):
 		for concert in self.concerts:
 			if concert.place == place:
@@ -50,29 +50,27 @@ class ConcertTrackerApp:
 		if musician_type not in ConcertTrackerApp.VALID_MUSICIAN_TYPES:
 			raise ValueError("Invalid musician type!")
 		
-		elif self.__find_from_name(self.musicians, name) is not None:
+		elif self.__find_from_name(self.musicians, name):
 			raise Exception(f"{name} is already a musician!")
 		
 		musician = ConcertTrackerApp.VALID_MUSICIAN_TYPES[musician_type].from_name(name, age)
 		self.musicians.append(musician)
-		# self.musicians.append(ConcertTrackerApp.VALID_MUSICIAN_TYPES[musician_type].from_name(name, age))
 		return f"{name} is now a {musician_type}."
 	
 	def create_band(self, name: str):
 		if self.__find_from_name(self.bands, name):
-			raise f"{name} band is already created!"
+			raise Exception(f"{name} band is already created!")
 		
 		self.bands.append(Band.from_name(name))
-		# self.bands.append(Band.from_name(name))
 		return f"{name} was created."
 	
 	def create_concert(self, genre: str, audience: int, ticket_price: float, expenses: float, place: str):
 		concert = self.__find_concert_by_place(place)
-		if concert is not None:
+		
+		if concert:
 			raise Exception(f"{place} is already registered for {concert.genre} concert!")
 		
 		concert = Concert(genre, audience, ticket_price, expenses, place)
-		# self.concerts.append(Concert(genre, audience, ticket_price, expenses, place))
 		self.concerts.append(concert)
 		return f"{genre} concert in {place} was added."
 	
@@ -91,12 +89,11 @@ class ConcertTrackerApp:
 	
 	def remove_musician_from_band(self, musician_name: str, band_name: str):
 		band = self.__find_from_name(self.bands, band_name)
-		musician = self.__find_from_name(band.members, musician_name)
-		
 		if band is None:
 			raise Exception(f"{band_name} isn't a band!")
 		
-		elif musician is None:
+		musician = self.__find_from_name(band.members, musician_name)
+		if musician is None:
 			raise Exception(f"{musician_name} isn't a member of {band_name}!")
 		
 		band.remove_member(musician)
@@ -115,4 +112,3 @@ class ConcertTrackerApp:
 		
 		profit = (concert.audience * concert.ticket_price) - concert.expenses
 		return f"{band_name} gained {profit:.2f}$ from the {concert.genre} concert in {concert_place}."
-	
