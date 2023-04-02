@@ -98,6 +98,13 @@ class TestTruckDriver(TestCase):
 		self.truck_driver.check_for_activities(10000)
 
 		self.assertEqual(50, self.truck_driver.earned_money)
+		
+	# def test_if_check_for_activities_raises(self):
+	# 	self.truck_driver.earned_money = 5000
+	# 	with self.assertRaises(ValueError) as ex:
+	# 		pass
+	#
+	# 	self.assertEqual(50, self.truck_driver.earned_money)
 
 	def test_repr_returns_correct_message(self):
 		self.assertEqual("Test has 0 miles behind his back.", str(self.truck_driver))
