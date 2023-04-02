@@ -58,7 +58,7 @@ class FoodOrdersApp:
 		return True
 	
 	def register_client(self, client_phone_number: str):
-		if self.__find_client_by_phone_number(self.clients_list, client_phone_number) is not None:
+		if self.__find_client_by_phone_number(self.clients_list, client_phone_number):
 			raise Exception("The client has already been registered!")
 		
 		self.clients_list.append(Client(client_phone_number))
@@ -76,12 +76,10 @@ class FoodOrdersApp:
 		return '\n'.join([meal.details() for meal in self.menu])
 	
 	def add_meals_to_shopping_cart(self, client_phone_number: str, **meal_names_and_quantities):
-		if not self.__is_menu_ready(self.menu):
-			raise Exception("The menu is not ready!")
-		
+		self.show_menu()
 		client = self.__find_client_by_phone_number(self.clients_list, client_phone_number)
 		
-		if client is None:
+		if not client:
 			self.register_client(client_phone_number)
 			client = self.__find_client_by_phone_number(self.clients_list, client_phone_number)
 		
@@ -108,6 +106,9 @@ class FoodOrdersApp:
 	
 	def finish_order(self, client_phone_number: str):
 		client = self.__find_client_by_phone_number(self.clients_list, client_phone_number)
+		
+		if len(client.shopping_cart) == 0:
+			raise Exception("There are no ordered meals!")
 		
 		result = f"Receipt #{self.receipt_id} with total amount of {client.bill:.2f} was successfully paid for {client.phone_number}."
 		client.reset_cart_and_bill()

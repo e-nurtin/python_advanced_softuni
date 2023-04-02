@@ -59,12 +59,14 @@ class Controller:
         aquarium = self.find_entity_from_name(self.aquariums, aquarium_name)
         decoration = self.decorations_repository.find_by_type(decoration_type)
 
-        if decoration != "None" and aquarium:
-            self.decorations_repository.remove(decoration)
+        if decoration == "None":
+            return f"There isn't a decoration of type {decoration_type}."
+        
+        elif aquarium:
             aquarium.add_decoration(decoration)
+            self.decorations_repository.remove(decoration)
             return f"Successfully added {decoration_type} to {aquarium_name}."
-        return f"There isn't a decoration of type {decoration_type}."
-
+        
     def add_fish(self, aquarium_name: str, fish_type: str,
                  fish_name: str, fish_species: str, price: float):
         if fish_type not in self.fish_types:
@@ -75,6 +77,7 @@ class Controller:
 
         if fish.aquarium_type != type(aquarium).__name__:
             return "Water not suitable."
+        
         return aquarium.add_fish(fish)
 
     def feed_fish(self, aquarium_name: str):
@@ -84,8 +87,7 @@ class Controller:
 
     def calculate_value(self, aquarium_name: str):
         aquarium = self.find_entity_from_name(self.aquariums, aquarium_name)
-        if aquarium:
-            return f"The value of Aquarium {aquarium_name} is {self.__calculate(aquarium)}."
+        return f"The value of Aquarium {aquarium_name} is {self.__calculate(aquarium):.2f}."
 
     def report(self):
         result = []

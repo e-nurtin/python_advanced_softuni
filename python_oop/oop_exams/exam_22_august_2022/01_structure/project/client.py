@@ -35,4 +35,4 @@ class Client:
 	def reset_cart_and_bill(self):
 		self.meal_quantities = {}
 		self.shopping_cart = []
-		self.bill = 0
+		self.bill = 0.0

@@ -11,7 +11,11 @@ class DecorationRepository:
         self.decorations.append(decoration)
 
     def remove(self, decoration: BaseDecoration):
-        self.decorations.remove(decoration)
+        for decor in self.decorations:
+            if decor == decoration:
+                self.decorations.remove(decoration)
+                return True
+        return False
 
     def find_by_type(self, decoration_type: str):
         for decoration in self.decorations:
