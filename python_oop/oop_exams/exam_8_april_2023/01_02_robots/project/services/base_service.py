@@ -12,10 +12,6 @@ class BaseService(ABC):
 		self.robots: List[BaseRobot] = []
 	
 	@property
-	def count_of_robots(self):
-		return len(self.robots)
-	
-	@property
 	def price_of_all_robots(self):
 		return sum([r.price for r in self.robots])
 	
@@ -46,8 +42,11 @@ class BaseService(ABC):
 		return len(self.robots) < self.capacity
 	
 	def feed_all_robots(self):
+		robot_count = 0
 		for robot in self.robots:
 			robot.eating()
+			robot_count += 1
+		return robot_count
 	
 	def details(self):
 		result = [
