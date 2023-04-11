@@ -12,7 +12,7 @@
 
 -----------------------
 ### Finished Python OOP --> [Click!](https://softuni.bg/certificates/details/168059/5855d4f1"Certificate") [Repo] (https://github.com/e-nurtin/python_advanced_softuni/tree/main/python_oop)
-### Finished Python Advanced module --> [Click!](https://softuni.bg/certificates/details/159395/5c6f18e9"Certificate") [Repo](https://github.com/e-nurtin/python_advanced_softuni/tree/main/python_advanced)
+### Finished Python Advanced module --> [Click!](https://softuni.bg/certificates/details/159395/5c6f18e9"Certificate")  [Repo](https://github.com/e-nurtin/python_advanced_softuni/tree/main/python_advanced)
 ### Finished Python Fundamentals module --> [Click!](https://softuni.bg/certificates/details/148882/57f2c6d9 "Certificate") [Repo](https://github.com/e-nurtin/SoftUni)
 ### Finished Python basics module --> [Click!](https://softuni.bg/certificates/details/140420/bd982123 "Certificate")
 
