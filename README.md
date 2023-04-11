@@ -5,6 +5,7 @@
 # This repo contains my solutions for Softuni's Python Advanced and Python OOP software education course.
 
 ### During the OOP course I deeply studied all principles of Object Oriented Programming and solved a lot of practical problems as can be seen in the current repo. I studied each pillar of OOP in detail and how to apply best practices in extendable code using SOLID principles. Studied different design patterns and how to apply them when needed. Learned working with decorators, how to override dunder methods and use them to our advantage.
+-----------------------
 
 ### During Python Advanced course I studied working with queues and stacks in Python as well as advanced data types such as multidimensional lists. Learned how to handle errors and files. Studied modules and how to work with them.
 
